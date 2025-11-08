@@ -6,7 +6,7 @@ Ik hoop dat mensen een keer meer respect voor elkaar hebben en ook mensen met ne
 
 De MCU die ik heb gebruikt is de ATtiny816. Ik had liever de ATtiny1616 gebruikt, maar omdat deze niet voorradig was voor de 816 gekozen als alterantief. Bij opnieuw bestellen kan de MCU dus straffeloos worden vervangen.
 
-![Uploading image.png…]()
+<img width="1048" height="396" alt="image" src="https://github.com/user-attachments/assets/1b3b778c-9653-4a3b-811f-21e12a2022a2" />
 
 Ik heb slechts een beperkt aantal binnen op de MCU gebruikt, maar de ATtiny1616 is een betaalbare en mooi kleine MCU met een prettige hoeveelheid geheugen.
 De volgende pinnen zijn in gebruik:
