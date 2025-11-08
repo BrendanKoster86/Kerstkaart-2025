@@ -8,6 +8,8 @@ De MCU die ik heb gebruikt is de ATtiny816. Ik had liever de ATtiny1616 gebruikt
 
 <img width="1048" height="396" alt="image" src="https://github.com/user-attachments/assets/1b3b778c-9653-4a3b-811f-21e12a2022a2" />
 
+<img width="1291" height="555" alt="image" src="https://github.com/user-attachments/assets/94a29011-270c-408b-b002-f056502fc854" />
+
 Ik heb slechts een beperkt aantal binnen op de MCU gebruikt, maar de ATtiny1616 is een betaalbare en mooi kleine MCU met een prettige hoeveelheid geheugen.
 De volgende pinnen zijn in gebruik:
 11   (PC2)  Voor het snoer met 43 neoPixel leds
