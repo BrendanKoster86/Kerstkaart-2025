@@ -29,4 +29,4 @@ A2   (PC2)  Voor het knopje, staat standaard op hoog, en wanneer je deze indrukt
 
  Het verschil tussen 'VCC' en 'VCC in' is dat er tussen het 'VCC' net van het bord en de 'VCC in' een automatische zekering is geplaatst. Omdat ik op dit bord ook wil testen met een speaker en of ik deze direct of via een transistor moet laten lopen en ik niet weet of ik deze tussen GND en een GPIO of VCC en een GPIO wil plaatsen heb ik ook de echte VCC uitgebroken om draadjes van een speakertje op te kunnen solderen.
 
- Tussen speaker en Speaker_MCU zit dus een weerstand en een mosfet om de speaker te kunnen gebruiken zonder belasting op de GPIO voor dus de test wat beter gaat.
+ Tussen speaker en MC_speaker zit dus een weerstand en een mosfet om de speaker te kunnen gebruiken zonder belasting op de GPIO voor dus de test wat beter gaat.
