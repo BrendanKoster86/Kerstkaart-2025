@@ -25,4 +25,4 @@ A2   (PC2)  Voor het knopje, staat standaard op hoog, en wanneer je deze indrukt
 
  In mijn youtube video (moet ik op moment van schrijven nog maken) zal ik ingaan op het programmeren omdat ik vermoed dat sommige mensen die ik de kaart geef dat wel grappig zouden vinden...
 
- funfact. modus 8, 9 en 10 zijn via AI gemaakt en vindt ik erg geslaagd, dus worden als 3e, 4e en 5e weergegeven.
+ funfact. modus 8, 9 en 10 zijn via AI gemaakt en vindt ik erg geslaagd, dus worden als 2e, 3e en 4e weergegeven.
