@@ -3,7 +3,7 @@ void modus_3_7() {
   muts_3_7();
   vonkel();
   kar_3_7();
-  sneeuw_3_7();
+  sneeuw();
 }
 
 void muts_3_7() {
@@ -41,27 +41,32 @@ void kar_3_7() {
 }
 
 
-void sneeuw_3_7(){
-  /* lampjes bovenop het karretje
-   * lampjes 16, 17, 18 en 25 t/m 28
-   */
+// void sneeuw_3_7(){
+//   /* lampjes bovenop het karretje
+//    * lampjes 16, 17, 18 en 25 t/m 28
+//    */
   
-  if (millis() > sn_change + 500) {
-    sneeuw_rood[0] = random(16, 20);
-    sneeuw_rood[1] = random(25, 30);
-    sn_change = millis();
-  }
-  if (millis() > sn_change2 + 500) {
-    for (int i = 16; i <= 18; i++){
-      sneeuw_lampjes(i);
-    }
-    for (int i = 25; i <= 28; i++){
-      sneeuw_lampjes(i);
-    }
-    changes = true;
-    sn_change2 = millis();
-  }
-}
+//   if (millis() > sn_change + 1000) {
+//     sneeuw_rood[0] = random(22, 30);
+//     sneeuw_rood[1] = random(22, 30);
+//     for (int i = 0; i < 2; i++) {
+//       if (sneeuw_rood[i] < 25) {
+//         sneeuw_rood[i] = sneeuw_rood[i] - 7;
+//       }
+//     }
+//     sn_change = millis();
+//   // }
+//   // if (millis() > sn_change2 + 40) {
+//     for (int i = 16; i <= 18; i++){
+//       sneeuw_lampjes(i);
+//     }
+//     for (int i = 25; i <= 28; i++){
+//       sneeuw_lampjes(i);
+//     }
+//     changes = true;
+//     sn_change2 = millis();
+//   }
+// }
 
 void muts_lampjes_3_7(){
   /* De muts gaat om de lampjes op de rand van de muts... het bolletje is apart

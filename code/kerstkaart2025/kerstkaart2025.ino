@@ -3,10 +3,24 @@
 
 #include <tinyNeoPixel.h>
 
+bool changes = false;
+
+byte kar_sneeuw[3] = {};
+byte sneeuw_rood[2] = {};
+
+// How many NeoPixels are attached to the Arduino?
+#define NUMPIXELS      3
 
 // Which pin on the Arduino is connected to the NeoPixels?
 #define LED1           12
 #define KNOP           A2
+
+// When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
+// Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest
+// example for more information on possible values.
+tinyNeoPixel pixels1 = tinyNeoPixel(43, LED1, NEO_GRB + NEO_KHZ800);
+
+
 #define ROOD         pixels1.Color(30, 0, 0)
 #define PAARS        pixels1.Color(30, 0, 10)
 #define BLAUW        pixels1.Color(0, 0, 30)
@@ -19,7 +33,7 @@
 #define UIT          pixels1.Color(0, 0, 0)
 
 
-byte modus = 1;
+byte modus = 2;
 
 byte fase_sl = 1;
 unsigned long sl_change = 0;
@@ -37,18 +51,9 @@ unsigned long sn_change2 = 0;
 unsigned long kr_change = 0;
 unsigned long kr_change2 = 0;
 
-bool changes = false;
+uint32_t mu_kleur = GEEL;
 
-byte kar_sneeuw[3] = {};
-byte sneeuw_rood[2] = {};
 
-// How many NeoPixels are attached to the Arduino?
-#define NUMPIXELS      3
-
-// When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
-// Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest
-// example for more information on possible values.
-tinyNeoPixel pixels1 = tinyNeoPixel(43, LED1, NEO_GRB + NEO_KHZ800);
 
 int delayval = 500; // delay for half a second
 
@@ -115,7 +120,8 @@ void knop_input(){
     modus = 1;
   }
   if (modus > 10) {
-    modus = 1;
+    // Op één of andere manier 
+    modus = 2;
   }
 }
 
@@ -150,79 +156,112 @@ void vonkel(){
 }
 
 
+// void sneeuw(){
+//   /* lampjes bovenop het karretje
+//    * lampjes 16, 17, 18 en 25 t/m 28
+//    */
+  
+//   if (modus_sn == 1){
+//     if (millis() > sn_change + 500) {
+//       sneeuw_rood[0] = random(16, 20);
+//       sneeuw_rood[1] = random(25, 30);
+//       sn_change = millis();
+//     }
+//     if (millis() > sn_change2 + 500) {
+//       for (int i = 16; i <= 18; i++){
+//         sneeuw_lampjes(i);
+//       }
+//       for (int i = 25; i <= 28; i++){
+//         sneeuw_lampjes(i);
+//       }
+//       changes = true;
+//       sn_change2 = millis();
+//     }
+//   }
+// }
+
 void sneeuw(){
+  sneeuw(true);
+}
+
+void sneeuw(bool force){
   /* lampjes bovenop het karretje
    * lampjes 16, 17, 18 en 25 t/m 28
    */
   
-  if (modus_sn == 1){
-    if (millis() > sn_change + 500) {
-      sneeuw_rood[0] = random(16, 20);
-      sneeuw_rood[1] = random(25, 30);
-      sn_change = millis();
-    }
-    if (millis() > sn_change2 + 500) {
-      for (int i = 16; i <= 18; i++){
-        sneeuw_lampjes(i);
+  if (millis() > sn_change + 1000) {
+    sneeuw_rood[0] = random(22, 30);
+    sneeuw_rood[1] = random(22, 30);
+    for (int i = 0; i < 2; i++) {
+      if (sneeuw_rood[i] < 25) {
+        sneeuw_rood[i] = sneeuw_rood[i] - 6;
       }
-      for (int i = 25; i <= 28; i++){
-        sneeuw_lampjes(i);
-      }
-      changes = true;
-      sn_change2 = millis();
     }
+    sn_change = millis();
+  // }
+  // if (millis() > sn_change2 + 40) {
+    for (int i = 16; i <= 18; i++){
+      sneeuw_lampjes(i);
+    }
+    for (int i = 25; i <= 28; i++){
+      sneeuw_lampjes(i);
+    }
+    changes = true;
+    sn_change2 = millis();
   }
 }
 
-
-
 void kar_lampjes(int lampje){
-  int i = random(1, 5);
+  // int i = random(1, 5);
   if ((lampje == kar_sneeuw[0]) || (lampje == kar_sneeuw[1]) || (lampje == kar_sneeuw[2])) {
-    if (i == 1) {
-      pixels1.setPixelColor(lampje, fade(WIT, .25));
-    } else if (i == 2) {
-      pixels1.setPixelColor(lampje, fade(WIT, .5));
-    } else if (i == 3) {
-      pixels1.setPixelColor(lampje, fade(WIT, .75));
-    } else if (i == 4) {
-      pixels1.setPixelColor(lampje, WIT);
-    }
+    pixels1.setPixelColor(lampje, fade(WIT, .5));
+    // if (i == 1) {
+    //   pixels1.setPixelColor(lampje, fade(WIT, .25));
+    // } else if (i == 2) {
+    //   pixels1.setPixelColor(lampje, fade(WIT, .5));
+    // } else if (i == 3) {
+    //   pixels1.setPixelColor(lampje, fade(WIT, .75));
+    // } else if (i == 4) {
+    //   pixels1.setPixelColor(lampje, WIT);
+    // }
   } else {
-    if (i == 1) {
-      pixels1.setPixelColor(lampje, fade(ROOD, .25));
-    } else if (i == 2) {
-      pixels1.setPixelColor(lampje, fade(ROOD, .5));
-    } else if (i == 3) {
-      pixels1.setPixelColor(lampje, fade(ROOD, .75));
-    } else if (i == 4) {
-      pixels1.setPixelColor(lampje, ROOD);
-    }
+    pixels1.setPixelColor(lampje, fade(ROOD, .5));
+    // if (i == 1) {
+    //   pixels1.setPixelColor(lampje, fade(ROOD, .25));
+    // } else if (i == 2) {
+    //   pixels1.setPixelColor(lampje, fade(ROOD, .5));
+    // } else if (i == 3) {
+    //   pixels1.setPixelColor(lampje, fade(ROOD, .75));
+    // } else if (i == 4) {
+    //   pixels1.setPixelColor(lampje, ROOD);
+    // }
   }
 }
 
 void sneeuw_lampjes(int lampje){
-  int i = random(1,5);
+  // int i = random(1,5);
   if ((lampje == sneeuw_rood[0]) || (lampje == sneeuw_rood[1])) {
-    if (i == 1) {
-      pixels1.setPixelColor(lampje, fade(ROOD, .25));
-    } else if (i == 2) {
-      pixels1.setPixelColor(lampje, fade(ROOD, .5));
-    } else if (i == 3) {
-      pixels1.setPixelColor(lampje, fade(ROOD, .75));
-    } else if (i == 4) {
-      pixels1.setPixelColor(lampje, ROOD);
-    }
+    pixels1.setPixelColor(lampje, fade(ROOD, .5));
+    // if (i == 1) {
+    //   pixels1.setPixelColor(lampje, fade(ROOD, .25));
+    // } else if (i == 2) {
+    //   pixels1.setPixelColor(lampje, fade(ROOD, .5));
+    // } else if (i == 3) {
+    //   pixels1.setPixelColor(lampje, fade(ROOD, .75));
+    // } else if (i == 4) {
+    //   pixels1.setPixelColor(lampje, ROOD);
+    // }
   } else {
-    if (i == 1) {
-      pixels1.setPixelColor(lampje, fade(WIT, .25));
-    } else if (i == 2) {
-      pixels1.setPixelColor(lampje, fade(WIT, .5));
-    } else if (i == 3) {
-      pixels1.setPixelColor(lampje, fade(WIT, .75));
-    } else if (i == 4) {
-      pixels1.setPixelColor(lampje, WIT);
-    }
+    pixels1.setPixelColor(lampje, fade(WIT, .5));
+    // if (i == 1) {
+    //   pixels1.setPixelColor(lampje, fade(WIT, .25));
+    // } else if (i == 2) {
+    //   pixels1.setPixelColor(lampje, fade(WIT, .5));
+    // } else if (i == 3) {
+    //   pixels1.setPixelColor(lampje, fade(WIT, .75));
+    // } else if (i == 4) {
+    //   pixels1.setPixelColor(lampje, WIT);
+    // }
     
   }
 }

@@ -2,8 +2,8 @@ void modus_1(){
   slee_1();
   muts_1();
   vonkel();
-  sneeuw_1();
   kar_1();
+  sneeuw();
 }
 
 void slee_1() {
@@ -24,36 +24,18 @@ void muts_1() {
   }
 }
 
-void sneeuw_1(){
-  /* lampjes bovenop het karretje
-   * lampjes 16, 17, 18 en 25 t/m 28
-   */
-  
-  if (millis() > sn_change + 500) {
-    sneeuw_rood[0] = random(16, 20);
-    sneeuw_rood[1] = random(25, 30);
-    sn_change = millis();
-  }
-  if (millis() > sn_change2 + 500) {
-    for (int i = 16; i <= 18; i++){
-      sneeuw_lampjes(i);
-    }
-    for (int i = 25; i <= 28; i++){
-      sneeuw_lampjes(i);
-    }
-    changes = true;
-    sn_change2 = millis();
-  }
-}
+
 
 void kies_kar_sneeuw_1(){
-  kar_sneeuw[0] = random(33, 43);
-  kar_sneeuw[1] = random(33, 43);
-  kar_sneeuw[2] = 0;
-  if (random (1, 4) == 3) {
-    kar_sneeuw[2] = random(29, 32);
-  } else {
-    kar_sneeuw[2] = random(11, 16);
+  kar_sneeuw[0] = random(25, 43);
+  kar_sneeuw[1] = random(25, 43);
+  kar_sneeuw[2] = 15;//random(25, 43);
+  for (int i = 0; i < 3; i++) {
+    if (kar_sneeuw[i] < 30) {
+      kar_sneeuw[i] = kar_sneeuw[i] - 15;
+    } else if (kar_sneeuw[i] == 32) {
+      kar_sneeuw[i] = 29;
+    }
   }
 }
 
@@ -61,11 +43,11 @@ void kar_1(){
   /* lampjes bovenop het karretje
    * lampjes 11 t/m 15,  29 t/m 31 en 33 t/m 42
    */
-  if (millis() > kr_change + 500) {
-    kies_kar_sneeuw_2();
+  if (millis() > kr_change + 60) {
+    kies_kar_sneeuw_1();
     kr_change = millis();
-  }
-  if (millis() > kr_change2 + 500) {
+  // }
+  // if (millis() > kr_change2 + 500) {
     for (int i = 11; i <= 15; i++){
       kar_lampjes(i);
     }
@@ -108,7 +90,7 @@ void muts_lampjes_1(){
   /* De muts gaat om de lampjes op de rand van de muts... het bolletje is apart
    * Dit gaat om lampjes 20 t/m 24
    */
-  if (fase_mu > 3) {
+  if (fase_mu > 4) {
     fase_mu = 1;
   }
   if (fase_mu == 1) {
@@ -124,5 +106,8 @@ void muts_lampjes_1(){
     pixels1.setPixelColor(23, UIT);
     pixels1.setPixelColor(20, fade(WIT, .75));
     pixels1.setPixelColor(24, fade(WIT, .75));
+  } else if (fase_mu == 4) {
+    pixels1.setPixelColor(20, UIT);
+    pixels1.setPixelColor(24, UIT);
   }
 }
